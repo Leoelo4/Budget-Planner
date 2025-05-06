@@ -1,1 +1,1 @@
-# This Project Is To Track Income/Expenses & Display Clearly To Users Through Tkinter (GUI)
+# This Project Is To Track Income/Expenses & Display Clearly To Users Through Tkinter (GUI) with a good design.
