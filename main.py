@@ -76,7 +76,8 @@ entry_frame.pack(pady=20)
 income_frame = tk.Frame(
     entry_frame, 
     bg="#1b263b",                       # Frame background color
-    padx=20, pady=10,
+    padx=20, 
+    pady=25,
     highlightbackground="#778899",      # Frame border color
     highlightthickness=1                # Frame border thickness    
 )
@@ -105,7 +106,7 @@ income_category = ttk.Combobox(
     width=25,
     state="readonly"
 )
-income_category.pack(pady=2)
+income_category.pack(pady=(0, 10))
 
 # Input field for income description with a text label
 tk.Label(income_frame, text="Description:", fg="white", bg="#1b263b").pack(anchor="w") # Description Label And Input
@@ -123,7 +124,7 @@ expense_frame = tk.Frame(
     entry_frame,
     bg="#1b263b",
     padx=20,
-    pady=15,
+    pady=25,
     highlightbackground="#778899",
     highlightthickness=1
 )
@@ -154,8 +155,8 @@ expense_description = tk.Entry(expense_frame, width=27)
 expense_description.pack(pady=2)
 
 # Button to add expense
-income_button = ttk.Button(expense_frame, text="Add Expense")
-income_button.pack(pady=(15, 10))
+expense_button = ttk.Button(expense_frame, text="Add Expense")
+expense_button.pack(pady=(15, 10))
 
 
 
