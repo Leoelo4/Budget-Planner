@@ -1,9 +1,9 @@
 # This Project Is To Track Income/Expenses & Display Clearly To Users Through Tkinter (GUI) with a good design.
 
 # Importing necessary libraries
-import tkinter as tk
-from tkinter import ttk
-from tkinter import messagebox
+import tkinter as tk                # Renaming tkinter to tk for easier use
+from tkinter import ttk             # Importing ttk for tk themed widgets
+from tkinter import messagebox      # Importing messagebox to popup messages to user
 
 # Global constants 
 # Storing options for currency, income categories, and expense categories
@@ -265,9 +265,8 @@ summary_title.pack(pady=(5, 5))
 # Line below the summary title for design and clarity
 summary_separator = tk.Frame(
     summary_frame,
-    height = 2,
-    width = 400,
-    bg = "#778899",
+    height = 2, width = 400,            # Height & width of the line
+    bg = "#778899",                     # Setting line colour
 )
 summary_separator.pack(pady=(7.5, 15))
 
@@ -275,10 +274,9 @@ summary_separator.pack(pady=(7.5, 15))
 summary_label = tk.Label(
     summary_frame,
     text = "",
-    font = ("Arial", 14, "bold"),
-    fg = "white",
-    bg = "#1b263b",
-    width = 77
+    font = ("Arial", 14, "bold"),       # Summary label font, size and style
+    fg = "white", bg = "#1b263b",       # Summary label background colour
+    width = 77                          # Summary label width
 )
 summary_label.pack(pady = (5, 5))
 
@@ -303,28 +301,26 @@ def update_summary():
 #   Entry History Section
 # ==========================
 
+# Creating the history frame
 history_title = tk.Label(
     root,
-    text="ENTRY HISTORY",
-    font=("Arial", 18, "bold"),
-    fg="white",
-    bg="#0d1b2a"
+    text="ENTRY HISTORY",                       # Title for history section for clarity
+    font=("Arial", 18, "bold"), fg="white",     # Title font colour, size and style
+    bg="#0d1b2a"                                # Title background colour
 )
 history_title.pack(pady=(5, 20))
 
 history_text = tk.Text(
     root,
-    height = 15,
-    width = 107,
-    state = "disabled",
-    bg = "#1b263b",
-    fg = "white",
-    font = ("Courier New", 10),
-    highlightbackground="#778899",      # Frame border color
-    highlightthickness=1                # Frame border thickness    
+    height = 15, width = 107,                               # Text box height and width
+    state = "disabled",                                     # Setting text box to read-only
+    bg = "#1b263b",                                         # Text box background colour
+    fg = "white", font = ("Courier New", 10),               # Text font, size and style
+    highlightbackground="#778899", highlightthickness=1     # Frame border colour & thickness    
 )
 history_text.pack(pady=(5, 20))
 
+# Refreshes entry history to show recent entries
 def update_history():
     history_text.config(state="normal")
     history_text.delete(1.0, tk.END)
@@ -338,28 +334,24 @@ update_summary()
 #       Footer Section
 # ==========================
 
-# Creating the footer frame
-footer_frame = tk.Frame(
-    root,
-    bg = "#1b263b",
-)
+# Creating the footer frame & background colour
+footer_frame = tk.Frame(root, bg = "#1b263b")   # Footer frame crated with background colour
 footer_frame.pack(side=tk.BOTTOM, fill="x")     # Forces the footer at the bottom of the window & fills entire width
 
 # Line above the footer to divide sections
 footer_separator = tk.Frame(
     footer_frame,
-    height = 2,
-    bg = "#778899"
+    height = 2,                 # Seperator line height
+    bg = "#778899"              # Seperator line colour
 )
 footer_separator.pack(side = tk.TOP, fill = "x")
 
 # Footer text and design
 footer = tk.Label(
     footer_frame,
-    text = " © GUI Created By Leoelos  |   2025",
-    font = ("Arial", 10),
-    fg = "white",
-    bg = "#1b263b"
+    text = " © GUI Created By Leos  |   2025",          # Footer text
+    font = ("Arial", 10),                               # Footer font and font size
+    fg = "white", bg = "#1b263b"                        # Footer text and background colour
 )
 footer.pack(side=tk.BOTTOM, pady = (5, 5))
 
