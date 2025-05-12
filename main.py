@@ -14,9 +14,9 @@ EXPENSE_CATEGORIES = ["Food", "Rent", "Utilities", "Entertainment", "Other"] # C
 # Creating the main window
 root = tk.Tk()
 root.title("Budget Tracker GUI")    # Title of the application window                
-root.geometry("800x700")            # Application size
+root.geometry("800x950")            # Application size
 root.configure(bg="#0d1b2a")        # Application background color
-root.minsize(800, 700)              # Minimum size of the application 
+root.minsize(800, 950)              # Minimum size of the application 
 
 
 # Widget Styling
@@ -130,7 +130,7 @@ def add_income():
             raise ValueError("Amount must be a positive number!")
         
         total_income  += amount
-        entry = f"Income: {currency_var.get()} {amount:.2f} | Category: {category} | Description: {description}"
+        entry = f"Input Type: Income | {currency_var.get()} {amount:.2f} | Category: {category} | Description: {description}"
         entries.append(entry)
 
         update_summary()
@@ -199,7 +199,7 @@ def add_expense():
         if amount <= 0:
             raise ValueError("Amount must be a positive number!")
         
-        entry = f"Expense: {currency_var.get()} {amount:.2f} | Category: {category} | Description: {description}"
+        entry = f"Input Type: Expense | Amount: {currency_var.get()} {amount:.2f} | Category: {category} | Description: {description}"
 
         entries.append(entry)
         update_summary()
@@ -310,5 +310,30 @@ def update_history():
     history_text.config(state="disabled")
 
 update_summary()
+
+# ==========================
+#       Footer Section
+# ==========================
+footer_frame = tk.Frame(
+    root,
+    bg = "#1b263b",
+)
+footer_frame.pack(side=tk.BOTTOM, fill="x")
+
+footer_separator = tk.Frame(
+    footer_frame,
+    height = 2,
+    bg = "#778899",
+)
+footer_separator.pack(side = tk.TOP, fill = "x")
+
+footer = tk.Label(
+    footer_frame,
+    text = " © GUI Created By Leoelos  |   2025",
+    font = ("Arial", 10),
+    fg = "white",
+    bg = "#1b263b",
+)
+footer.pack(side=tk.BOTTOM, pady = (5, 5))
 
 root.mainloop()
