@@ -11,13 +11,17 @@ CURRENCY_OPTIONS = ["£", "$", "€"]                  # Constant for currency o
 INCOME_CATEGORIES = ["Salary", "Bonus", "Other"]    # Constant for income categories
 EXPENSE_CATEGORIES = ["Food", "Rent", "Utilities", "Entertainment", "Other"] # Constant for expense categories
 
+# Global variables 
+total_income = 0        # Set default total income to 0
+total_expense = 0       # Set default total expenses to 0
+entries = []            # Empty list to store income & expense inputs
+
 # Creating the main window
 root = tk.Tk()
 root.title("Budget Tracker GUI")    # Title of the application window                
 root.geometry("800x950")            # Application size
 root.configure(bg="#0d1b2a")        # Application background color
 root.minsize(800, 950)              # Minimum size of the application 
-
 
 # Widget Styling
 style = ttk.Style(root)
@@ -46,51 +50,50 @@ currency_var = tk.StringVar(value=CURRENCY_OPTIONS[0])      # Creating default c
 currency_frame = tk.Frame(root, bg="#0d1b2a")               # Currency selection frame       
 currency_frame.pack(pady=5)                                 # Padding surrounding the frame
 
-# Currency text and dropdown menu with set options
+# Currency text and dropdown menu with set options from global constant
 currency_label = tk.Label(
     currency_frame,
-    text="SELECT CURRENCY:",
-    font=("Arial", 18, "bold"),
-    fg="white",
-    bg="#0d1b2a"
+    text="SELECT CURRENCY:",            # Text label next to currency dropdown menu
+    font=("Arial", 18, "bold"),         # Text font and design
+    fg="white",                         # Text font colour
+    bg="#0d1b2a"                        # Background colour
 )
 currency_label.pack(side=tk.LEFT, padx=5)
 
-# Dropdown menu to select type of currency
+# Dropdown menu to select type of currency with set options
 currency_menu = ttk.Combobox(
-    currency_frame,
-    textvariable=currency_var,
-    values=CURRENCY_OPTIONS,
+    currency_frame,                 
+    textvariable=currency_var,      # Variable to store user's selected currency
+    values=CURRENCY_OPTIONS,        # Referencing the constant for set currency options
     width=5,
-    state="readonly"
+    state="readonly"                # Enforces the dropdown is read-only
 )
 currency_menu.pack(side=tk.LEFT, padx=5)
-
 
 # ==========================
 #   Income/Expense Entry
 # ==========================
-entry_frame = tk.Frame(root, bg="#0d1b2a") 
+entry_frame = tk.Frame(root, bg="#0d1b2a")      # Creating the frame for income/expense frames to sit within
 entry_frame.pack(pady=20)
 
-#Income frame 
+# Income frame 
 income_frame = tk.Frame(
-    entry_frame, 
+    entry_frame,                        # Placing the entry frame within the entry (main) frame
     bg="#1b263b",                       # Frame background color
-    padx=20, 
-    pady=25,
+    padx=20,                            # Horizontal padding
+    pady=25,                            # Vertical padding
     highlightbackground="#778899",      # Frame border color
     highlightthickness=1                # Frame border thickness    
 )
-income_frame.pack(side=tk.LEFT, padx=25) # Forcing the frame to the left with padding
+income_frame.pack(side=tk.LEFT, padx=25)    # Forcing the frame to the left with padding
 
-# Income title
+# Income title and design
 income_title = tk.Label(
     income_frame, 
-    text="INCOME", 
-    font=("Arial", 18, "bold"),
-    fg="white", 
-    bg="#1b263b"
+    text="INCOME",                      # Text title for income section/frame
+    font=("Arial", 18, "bold"),         # Font, style and size of title
+    fg="white",                         # Title font colour
+    bg="#1b263b"                        # Title background colour
 )
 income_title.pack(pady=2)
 
@@ -103,15 +106,15 @@ income_amount.pack(pady=2)
 tk.Label(income_frame, text="Category:", fg="white", bg="#1b263b").pack(anchor="w") # Category Label And Dropdown Options
 income_category = ttk.Combobox(
     income_frame,
-    values=INCOME_CATEGORIES,   # Referencing the constant for income categories
-    width=25,
-    state="readonly"
+    values=INCOME_CATEGORIES,           # Referencing the constant for income categories
+    width=25,                           # Width of dropdown menu
+    state="readonly"                    # Forcing the dropdown into being read-only
 )
 income_category.pack(pady=(0, 10))
 
 # Input field for income description with a text label
 tk.Label(income_frame, text="Description:", fg="white", bg="#1b263b").pack(anchor="w") # Description Label And Input
-income_description = tk.Entry(income_frame, width=27)
+income_description = tk.Entry(income_frame, width=27) # Description input field
 income_description.pack(pady=2)
 
 # Button to confirm and add income
@@ -119,48 +122,58 @@ income_button = ttk.Button(income_frame, text="Add Income") # Button To Add Inco
 income_button.pack(pady=(25, 5))
 
 # Income Logic
+# This function is used to get user input for income and add it to the summary & history
 def add_income():
+    # Reference to global variable to store total income
     global total_income
     try:
-        amount = float(income_amount.get())
-        category = income_category.get().strip() or "Uncategorised"
-        description = income_description.get().strip()
+        amount = float(income_amount.get())                                 # Amount is equal to input from the income amount field
+        category = income_category.get().strip() or "Uncategorised"         # Category = input from category dropdown, if empty set Uncategorised
+        description = income_description.get().strip()                      # Description is equal to input from the description field  
 
-        if amount <= 0:
-            raise ValueError("Amount must be a positive number!")
+        if amount <= 0:                                                     # Check if the amount is a valid positive number
+            raise ValueError("Amount must be a positive number!")           # If not, raise a ValueError to show invalid input
         
+        # Adding the amount to the total income for future calculations in the program
         total_income  += amount
-        entry = f"Input Type: Income | {currency_var.get()} {amount:.2f} | Category: {category} | Description: {description}"
+        entry = f"Input Type: Income | {currency_var.get()} {amount:.2f} | Category: {category} | Description: {description}"   # Entry history income format
         entries.append(entry)
 
+        # Updating summary and history sections
         update_summary()
         update_history()
+
+        # Clearing input fields once the button is pressed
         income_amount.delete(0, tk.END)
         income_category.set("")
         income_description.delete(0, tk.END)
 
+        # Message box to show user the income was added without error
         messagebox.showinfo("Success", "Income Was Added Successfully!")
 
+    # ValueError to check number is valid with message box to display error to user
     except ValueError:
         messagebox.showerror("Invalid Input", "Please enter a valid number") 
 
+# Command to add income once the button is pressed
 income_button.config(command=add_income)
     
 # ===========================
 #       Expense Section
 # ===========================
+# Expense frame
 expense_frame = tk.Frame(
-    entry_frame,
-    bg="#1b263b",
-    padx=20,
-    pady=25,
-    highlightbackground="#778899",
-    highlightthickness=1
+    entry_frame,                        # Placing the expense frame within the entry frame to align with income frame horizontally
+    bg="#1b263b",                       # Background colour
+    padx=20,                            # Horizontal padding
+    pady=25,                            # Vertical padding
+    highlightbackground="#778899",      # Expense frame border colour
+    highlightthickness=1                # Border thickness amount
 )
 expense_frame.pack(side=tk.LEFT, padx=25)
 
 # Expense title and design
-expense_title = tk.Label(expense_frame, text="EXPENSE", font=("Arial", 18, "bold"), fg="white", bg="#1b263b") # Expense box and title
+expense_title = tk.Label(expense_frame, text="EXPENSE", font=("Arial", 18, "bold"), fg="white", bg="#1b263b") # Title design
 expense_title.pack(pady=(0, 10))
 
 # Input field for expense amount with text label
@@ -168,13 +181,13 @@ tk.Label(expense_frame, text="Amount:", fg="white", bg="#1b263b").pack(anchor="w
 expense_amount = tk.Entry(expense_frame, width=27)
 expense_amount.pack(pady=2)
 
-# Expense category dropdown meny with set options
+# Expense category dropdown menu with set options
 tk.Label(expense_frame, text="Category", fg="white", bg="#1b263b").pack(anchor="w")
 expense_category = ttk.Combobox(
     expense_frame,
-    values=EXPENSE_CATEGORIES,
+    values=EXPENSE_CATEGORIES,          # Referencing the constant for set expense categories
     width=25,
-    state="readonly"
+    state="readonly"                    # Forcing the dropdown menu to be read-only
 )
 expense_category.pack(pady=2)
 
@@ -189,16 +202,19 @@ expense_button.pack(pady=(25, 5))
 
 # Expense Logic
 def add_expense():
+    # Reference to global variable to store the total expense
     global total_expense
     try:
-        amount = float(expense_amount.get())
-        category = expense_category.get().strip() or "Uncategorised"
-        description = expense_description.get().strip()
+        amount = float(expense_amount.get())                            # Amount = input from expense amount field
+        category = expense_category.get().strip() or "Uncategorised"    # Category = input from dropdown menu, if empty set Uncategorised
+        description = expense_description.get().strip()                 # Description is the input from expense description field
         total_expense += amount
 
+        # If the amount is 0 or less, raise a ValueError
         if amount <= 0:
             raise ValueError("Amount must be a positive number!")
         
+        # Expense entry format for the history section
         entry = f"Input Type: Expense | Amount: {currency_var.get()} {amount:.2f} | Category: {category} | Description: {description}"
 
         entries.append(entry)
@@ -208,47 +224,54 @@ def add_expense():
         expense_category.set("")
         expense_description.delete(0, tk.END)
 
+        # Message box to show user's the expense was added without any error
         messagebox.showinfo("Success", "Expense Was Added Successfully!")
 
+    # ValueError to check the number is valid & display error message box to user
     except ValueError:
         messagebox.showerror("Invalid Input", "Please Enter A Valid Number")
 
-expense_button.config(command=add_expense)
+expense_button.config(command=add_expense)          # Setting the expense button to add expense through function once pressed
 
 # ==========================
-#   Summary Section
+#       Summary Section
 # ==========================
 
+# Creating the summary frame
 summary_frame = tk.Frame(root, bg="#1b263b") 
 summary_frame.pack(pady=20)
 
+# Summary frame title, padding and border
 summary_frame = tk.Frame(
     root,
-    bg = "#1b263b",
-    padx = 10,
-    pady = 15,
-    highlightbackground = "#778899",
-    highlightthickness = 1,
+    bg = "#1b263b",                     # Entire frame background colour
+    padx = 10,                          # Summary frame horizontal padding
+    pady = 15,                          # Summary frame vertical padding
+    highlightbackground = "#778899",    # Frame border colour
+    highlightthickness = 1              # Frame border thickness
 )
 summary_frame.pack(pady=(0, 15,))
 
+# Summary frame title and design
 summary_title  = tk.Label(
     summary_frame,
-    text = "BALANCE SUMMARY",
-    font = ("Arial", 18, "bold"),
-    fg = "white",
-    bg = "#1b263b",
+    text = "BALANCE SUMMARY",           # Frame title text
+    font = ("Arial", 18, "bold"),       # Title font and style
+    fg = "white",                       # Title font colour
+    bg = "#1b263b"                      # Title background colour to blend with the frame background
 )
 summary_title.pack(pady=(5, 5))
 
+# Line below the summary title for design and clarity
 summary_separator = tk.Frame(
     summary_frame,
     height = 2,
     width = 400,
     bg = "#778899",
 )
-summary_separator.pack(pady=(3, 5))
+summary_separator.pack(pady=(7.5, 15))
 
+# Display total income
 summary_label = tk.Label(
     summary_frame,
     text = "",
@@ -259,8 +282,22 @@ summary_label = tk.Label(
 )
 summary_label.pack(pady = (5, 5))
 
+# Seperator line below the summary section for design & clarity
 seperator = tk.Frame(root, height = 2, width = 700, bg = "#778899")
 seperator.pack(pady=(10, 10))
+
+# Function to calculate balance and update the summary
+def update_summary():
+    # Equation to calculate balance
+    balance = total_income - total_expense
+    # Summary text format to display total income, expense and balance
+    # Using currency_var.get() to get the user's selected currency choice and display this to them
+    summary = (
+        f"Total Income: {currency_var.get()} {total_income:.2f}   ┃   "
+        f"Total Expense: {currency_var.get()} {total_expense:.2f}   ┃   "
+        f"Balance: {currency_var.get()} {balance:.2f}"
+    )
+    summary_label.config(text=summary)
 
 # ==========================
 #   Entry History Section
@@ -288,20 +325,6 @@ history_text = tk.Text(
 )
 history_text.pack(pady=(5, 20))
 
-# Summary section logic
-total_income = 0
-total_expense = 0
-entries = []
-
-def update_summary():
-    balance = total_income - total_expense
-    summary = (
-        f"Total Income: {currency_var.get()} {total_income:.2f}   ┃   "
-        f"Total Expense: {currency_var.get()} {total_expense:.2f}   ┃   "
-        f"Balance: {currency_var.get()} {balance:.2f}"
-    )
-    summary_label.config(text=summary)
-
 def update_history():
     history_text.config(state="normal")
     history_text.delete(1.0, tk.END)
@@ -314,26 +337,31 @@ update_summary()
 # ==========================
 #       Footer Section
 # ==========================
+
+# Creating the footer frame
 footer_frame = tk.Frame(
     root,
     bg = "#1b263b",
 )
-footer_frame.pack(side=tk.BOTTOM, fill="x")
+footer_frame.pack(side=tk.BOTTOM, fill="x")     # Forces the footer at the bottom of the window & fills entire width
 
+# Line above the footer to divide sections
 footer_separator = tk.Frame(
     footer_frame,
     height = 2,
-    bg = "#778899",
+    bg = "#778899"
 )
 footer_separator.pack(side = tk.TOP, fill = "x")
 
+# Footer text and design
 footer = tk.Label(
     footer_frame,
     text = " © GUI Created By Leoelos  |   2025",
     font = ("Arial", 10),
     fg = "white",
-    bg = "#1b263b",
+    bg = "#1b263b"
 )
 footer.pack(side=tk.BOTTOM, pady = (5, 5))
 
+# Running the main loop
 root.mainloop()
