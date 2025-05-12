@@ -3,6 +3,7 @@
 # Importing necessary libraries
 import tkinter as tk
 from tkinter import ttk
+from tkinter import messagebox
 
 # Global constants 
 # Storing options for currency, income categories, and expense categories
@@ -27,7 +28,7 @@ style.configure("TComboBox", font=("Arial", 10), padding=(2,2,2,2))         # Dr
 # Main title header
 header = tk.Label(
     root, 
-    text="Budget Tracker GUI",      # Application Title
+    text="BUDGET TRACKER",          # Application Title
     font=("Arial", 32, "bold"),     # Title font/style and size
     fg="white",                     # Title font color   
     bg="#0d1b2a"                    # Title background color
@@ -115,15 +116,15 @@ income_description.pack(pady=2)
 
 # Button to confirm and add income
 income_button = ttk.Button(income_frame, text="Add Income") # Button To Add Income
-income_button.pack(pady=(15, 10))
+income_button.pack(pady=(25, 5))
 
 # Income Logic
 def add_income():
     global total_income
     try:
         amount = float(income_amount.get())
-        category = income_category.get()
-        description = income_description.get()
+        category = income_category.get().strip() or "Uncategorised"
+        description = income_description.get().strip()
 
         if amount <= 0:
             raise ValueError("Amount must be a positive number!")
@@ -138,8 +139,10 @@ def add_income():
         income_category.set("")
         income_description.delete(0, tk.END)
 
+        messagebox.showinfo("Success", "Income Was Added Successfully!")
+
     except ValueError:
-        pass 
+        messagebox.showerror("Invalid Input", "Please enter a valid number") 
 
 income_button.config(command=add_income)
     
@@ -182,15 +185,15 @@ expense_description.pack(pady=2)
 
 # Button to add expense
 expense_button = ttk.Button(expense_frame, text="Add Expense")
-expense_button.pack(pady=(15, 10))
+expense_button.pack(pady=(25, 5))
 
 # Expense Logic
 def add_expense():
     global total_expense
     try:
         amount = float(expense_amount.get())
-        category = expense_category.get()
-        description = expense_description.get()
+        category = expense_category.get().strip() or "Uncategorised"
+        description = expense_description.get().strip()
         total_expense += amount
 
         if amount <= 0:
@@ -205,36 +208,59 @@ def add_expense():
         expense_category.set("")
         expense_description.delete(0, tk.END)
 
+        messagebox.showinfo("Success", "Expense Was Added Successfully!")
+
     except ValueError:
-        pass
+        messagebox.showerror("Invalid Input", "Please Enter A Valid Number")
 
 expense_button.config(command=add_expense)
 
 # ==========================
 #   Summary Section
 # ==========================
-summary_title  = tk.Label(
+
+summary_frame = tk.Frame(root, bg="#1b263b") 
+summary_frame.pack(pady=20)
+
+summary_frame = tk.Frame(
     root,
-    text = "SUMMARY",
+    bg = "#1b263b",
+    padx = 10,
+    pady = 15,
+    highlightbackground = "#778899",
+    highlightthickness = 1,
+)
+summary_frame.pack(pady=(0, 15,))
+
+summary_title  = tk.Label(
+    summary_frame,
+    text = "BALANCE SUMMARY",
     font = ("Arial", 18, "bold"),
     fg = "white",
-    bg = "#0d1b2a"
+    bg = "#1b263b",
 )
-summary_title.pack(pady=(25, 5))
+summary_title.pack(pady=(5, 5))
+
+summary_separator = tk.Frame(
+    summary_frame,
+    height = 2,
+    width = 400,
+    bg = "#778899",
+)
+summary_separator.pack(pady=(3, 5))
 
 summary_label = tk.Label(
-    root,
+    summary_frame,
     text = "",
     font = ("Arial", 14, "bold"),
     fg = "white",
-    bg = "#0d1b2a"
+    bg = "#1b263b",
+    width = 77
 )
-summary_label.pack()
+summary_label.pack(pady = (5, 5))
 
 seperator = tk.Frame(root, height = 2, width = 700, bg = "#778899")
 seperator.pack(pady=(10, 10))
-
-
 
 # ==========================
 #   Entry History Section
@@ -251,12 +277,14 @@ history_title.pack(pady=(5, 20))
 
 history_text = tk.Text(
     root,
-    height = 10,
-    width = 90,
+    height = 15,
+    width = 107,
     state = "disabled",
     bg = "#1b263b",
     fg = "white",
-    font = ("Courier New", 10)
+    font = ("Courier New", 10),
+    highlightbackground="#778899",      # Frame border color
+    highlightthickness=1                # Frame border thickness    
 )
 history_text.pack(pady=(5, 20))
 
@@ -268,8 +296,8 @@ entries = []
 def update_summary():
     balance = total_income - total_expense
     summary = (
-        f"Total Income: {currency_var.get()} {total_income:.2f}\n"
-        f"Total Expense: {currency_var.get()} {total_expense:.2f}\n"
+        f"Total Income: {currency_var.get()} {total_income:.2f}   ┃   "
+        f"Total Expense: {currency_var.get()} {total_expense:.2f}   ┃   "
         f"Balance: {currency_var.get()} {balance:.2f}"
     )
     summary_label.config(text=summary)
