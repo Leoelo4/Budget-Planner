@@ -31,7 +31,7 @@ style.configure("TComboBox", font=("Arial", 10), padding=(2,2,2,2))         # Dr
 
 # Main title header
 header = tk.Label(
-    root, 
+    root,                           # Placing the main title within the root window
     text="BUDGET TRACKER",          # Application Title
     font=("Arial", 32, "bold"),     # Title font/style and size
     fg="white",                     # Title font color   
@@ -52,7 +52,7 @@ currency_frame.pack(pady=5)                                 # Padding surroundin
 
 # Currency text and dropdown menu with set options from global constant
 currency_label = tk.Label(
-    currency_frame,
+    currency_frame,                     # Placing the currency label within the currency frame
     text="SELECT CURRENCY:",            # Text label next to currency dropdown menu
     font=("Arial", 18, "bold"),         # Text font and design
     fg="white",                         # Text font colour
@@ -62,19 +62,19 @@ currency_label.pack(side=tk.LEFT, padx=5)
 
 # Dropdown menu to select type of currency with set options
 currency_menu = ttk.Combobox(
-    currency_frame,                 
+    currency_frame,                 # Placing the dropdown within the currency frame
     textvariable=currency_var,      # Variable to store user's selected currency
     values=CURRENCY_OPTIONS,        # Referencing the constant for set currency options
     width=5,
     state="readonly"                # Enforces the dropdown is read-only
 )
-currency_menu.pack(side=tk.LEFT, padx=5)
+currency_menu.pack(side=tk.LEFT, padx=5)    # Currency dropdown menu padding
 
 # ==========================
 #   Income/Expense Entry
 # ==========================
 entry_frame = tk.Frame(root, bg="#0d1b2a")      # Creating the frame for income/expense frames to sit within
-entry_frame.pack(pady=20)
+entry_frame.pack(pady=20)    # Entry frame padding
 
 # Income frame 
 income_frame = tk.Frame(
@@ -89,13 +89,13 @@ income_frame.pack(side=tk.LEFT, padx=25)    # Forcing the frame to the left with
 
 # Income title and design
 income_title = tk.Label(
-    income_frame, 
+    income_frame,                       # Placing the income title within the income frame
     text="INCOME",                      # Text title for income section/frame
     font=("Arial", 18, "bold"),         # Font, style and size of title
     fg="white",                         # Title font colour
     bg="#1b263b"                        # Title background colour
 )
-income_title.pack(pady=2)
+income_title.pack(pady=2)               # Income title padding
 
 # Input field for income amount with label
 tk.Label(income_frame, text="Amount:", fg="white", bg="#1b263b").pack(anchor="w")   # Amount Label And Input
@@ -105,12 +105,12 @@ income_amount.pack(pady=2)
 # Dropdown menu for income category with set options
 tk.Label(income_frame, text="Category:", fg="white", bg="#1b263b").pack(anchor="w") # Category Label And Dropdown Options
 income_category = ttk.Combobox(
-    income_frame,
+    income_frame,                       # Placing the dropdown within the income frame
     values=INCOME_CATEGORIES,           # Referencing the constant for income categories
     width=25,                           # Width of dropdown menu
     state="readonly"                    # Forcing the dropdown into being read-only
 )
-income_category.pack(pady=(0, 10))
+income_category.pack(pady=(0, 10))      # Income dropdown menu padding
 
 # Input field for income description with a text label
 tk.Label(income_frame, text="Description:", fg="white", bg="#1b263b").pack(anchor="w") # Description Label And Input
@@ -119,7 +119,7 @@ income_description.pack(pady=2)
 
 # Button to confirm and add income
 income_button = ttk.Button(income_frame, text="Add Income") # Button To Add Income
-income_button.pack(pady=(25, 5))
+income_button.pack(pady=(25, 5))    # Income button padding
 
 # Income Logic
 # This function is used to get user input for income and add it to the summary & history
@@ -163,40 +163,40 @@ income_button.config(command=add_income)
 # ===========================
 # Expense frame
 expense_frame = tk.Frame(
-    entry_frame,                        # Placing the expense frame within the entry frame to align with income frame horizontally
-    bg="#1b263b",                       # Background colour
-    padx=20,                            # Horizontal padding
-    pady=25,                            # Vertical padding
-    highlightbackground="#778899",      # Expense frame border colour
-    highlightthickness=1                # Border thickness amount
+    entry_frame,                            # Placing the expense frame within the entry frame to align with income frame horizontally
+    bg="#1b263b",                           # Background colour
+    padx=20,                                # Horizontal padding
+    pady=25,                                # Vertical padding
+    highlightbackground="#778899",          # Expense frame border colour
+    highlightthickness=1                    # Border thickness amount
 )
-expense_frame.pack(side=tk.LEFT, padx=25)
+expense_frame.pack(side=tk.LEFT, padx=25)   # Forcing the expense frame to the left & padding
 
 # Expense title and design
 expense_title = tk.Label(expense_frame, text="EXPENSE", font=("Arial", 18, "bold"), fg="white", bg="#1b263b") # Title design
-expense_title.pack(pady=(0, 10))
+expense_title.pack(pady=(0, 10))        # Expense title padding
 
-# Input field for expense amount with text label
+# Input field for expense amount with text label & design
 tk.Label(expense_frame, text="Amount:", fg="white", bg="#1b263b").pack(anchor="w")
 expense_amount = tk.Entry(expense_frame, width=27)
 expense_amount.pack(pady=2)
 
-# Expense category dropdown menu with set options
+# Expense category dropdown menu with set options & design
 tk.Label(expense_frame, text="Category", fg="white", bg="#1b263b").pack(anchor="w")
 expense_category = ttk.Combobox(
     expense_frame,
     values=EXPENSE_CATEGORIES,          # Referencing the constant for set expense categories
-    width=25,
+    width=25,                           # Width of dropdown menu
     state="readonly"                    # Forcing the dropdown menu to be read-only
 )
-expense_category.pack(pady=2)
+expense_category.pack(pady=2)           # Dropdown menu padding
 
-# Expense description input field with a text label
+# Expense description input field with a text label & Design
 tk.Label(expense_frame, text="Description:", fg="white", bg="#1b263b").pack(anchor="w")
 expense_description = tk.Entry(expense_frame, width=27)
 expense_description.pack(pady=2)
 
-# Button to add expense
+# Button to add expense & Padding
 expense_button = ttk.Button(expense_frame, text="Add Expense")
 expense_button.pack(pady=(25, 5))
 
@@ -217,9 +217,12 @@ def add_expense():
         # Expense entry format for the history section
         entry = f"Input Type: Expense | Amount: {currency_var.get()} {amount:.2f} | Category: {category} | Description: {description}"
 
+        # Adding the entry to the entries list
         entries.append(entry)
         update_summary()
         update_history()
+
+        # Deleting the input fields once add expense button has been pressed
         expense_amount.delete(0, tk.END)
         expense_category.set("")
         expense_description.delete(0, tk.END)
@@ -246,35 +249,35 @@ summary_frame = tk.Frame(
     highlightbackground = "#778899",    # Frame border colour
     highlightthickness = 1              # Frame border thickness
 )
-summary_frame.pack(pady=(0, 100))
+summary_frame.pack(pady=(15, 15))       # Summary frame padding
 
 # Summary frame title and design
 summary_title  = tk.Label(
-    summary_frame,
+    summary_frame,                      # Placing the summary title within the summary frame
     text = "BALANCE SUMMARY",           # Frame title text
     font = ("Arial", 18, "bold"),       # Title font and style
     fg = "white",                       # Title font colour
     bg = "#1b263b"                      # Title background colour to blend with the frame background
 )
-summary_title.pack(pady=(5, 5))
+summary_title.pack(pady=(5, 5))         # Summary title padding
 
 # Line below the summary title for design and clarity
 summary_separator = tk.Frame(
-    summary_frame,
+    summary_frame,                      # Placing the seperator inside of the summary frame
     height = 2, width = 400,            # Height & width of the line
     bg = "#778899",                     # Setting line colour
 )
-summary_separator.pack(pady=(7.5, 15))
+summary_separator.pack(pady=(7.5, 15))  # Summary separator padding
 
 # Display total income
 summary_label = tk.Label(
-    summary_frame,
-    text = "",
+    summary_frame,                      # Placing the summary label within the summary frame
+    text = "",                          # Setting the text to empty default as the function will update this
     font = ("Arial", 14, "bold"),       # Summary label font, size and style
     fg = "white", bg = "#1b263b",       # Summary label background colour
     width = 77                          # Summary label width
 )
-summary_label.pack(pady = (5, 5))
+summary_label.pack(pady = (5, 5))       # Summary label padding
 
 # Seperator line below the summary section for design & clarity
 seperator = tk.Frame(root, height = 2, width = 700, bg = "#778899")
@@ -304,7 +307,7 @@ history_title = tk.Label(
     font=("Arial", 18, "bold"), fg="white",     # Title font colour, size and style
     bg="#0d1b2a"                                # Title background colour
 )
-history_title.pack(pady=(5, 20))
+history_title.pack(pady=(5, 20))                # History title padding
 
 history_text = tk.Text(
     root,
@@ -336,20 +339,20 @@ footer_frame.pack(side=tk.BOTTOM, fill="x")     # Forces the footer at the botto
 
 # Line above the footer to divide sections
 footer_separator = tk.Frame(
-    footer_frame,
-    height = 2,                 # Seperator line height
-    bg = "#778899"              # Seperator line colour
+    footer_frame,               # Placing the separator within the footer frame
+    height = 2,                 # Separator line height
+    bg = "#778899"              # Separator line colour
 )
-footer_separator.pack(side = tk.TOP, fill = "x")
+footer_separator.pack(side = tk.TOP, fill = "x")    # Forces the separator at the top of the footer frame & fills the entire x axis (width)
 
 # Footer text and design
 footer = tk.Label(
-    footer_frame,
+    footer_frame,                                       # Placing the footer text within the footer frame
     text = " © GUI Created By Leos  |   2025",          # Footer text
     font = ("Arial", 10),                               # Footer font and font size
     fg = "white", bg = "#1b263b"                        # Footer text and background colour
 )
-footer.pack(side=tk.BOTTOM, pady = (5, 5))
+footer.pack(side=tk.BOTTOM, pady = (5, 5))              # Footer padding & forcing to be at the bottom
 
 # Running the main loop
 root.mainloop()
