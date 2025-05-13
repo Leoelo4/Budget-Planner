@@ -237,10 +237,6 @@ expense_button.config(command=add_expense)          # Setting the expense button
 #       Summary Section
 # ==========================
 
-# Creating the summary frame
-summary_frame = tk.Frame(root, bg="#1b263b") 
-summary_frame.pack(pady=20)
-
 # Summary frame title, padding and border
 summary_frame = tk.Frame(
     root,
@@ -250,7 +246,7 @@ summary_frame = tk.Frame(
     highlightbackground = "#778899",    # Frame border colour
     highlightthickness = 1              # Frame border thickness
 )
-summary_frame.pack(pady=(0, 15,))
+summary_frame.pack(pady=(0, 100))
 
 # Summary frame title and design
 summary_title  = tk.Label(
