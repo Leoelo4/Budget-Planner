@@ -355,4 +355,5 @@ footer = tk.Label(
 footer.pack(side=tk.BOTTOM, pady = (5, 5))              # Footer padding & forcing to be at the bottom
 
 # Running the main loop
-root.mainloop()
+if __name__ =="__main__":
+    root.mainloop()

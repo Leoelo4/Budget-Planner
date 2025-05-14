@@ -24,7 +24,7 @@ Head To Your Terminal And Enter: <br>
 2 - git clone https://github.com/Leoelo4/Budget-Planner.git <br>
 Alternatively Follow These Youtube Tutorials For **[Windows](https://www.youtube.com/watch?v=EhxPBMQFCaI)** & **[Mac](https://www.youtube.com/watch?v=R9Efdq3Fj-A)**
 
-**4 - Hit Play / Run Python File**
+**4 -** Head to the 'main.py' file and **Hit Play / Run Python File**
 <hr>
 
 ## Project UI / Application Overview
