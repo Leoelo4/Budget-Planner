@@ -32,6 +32,8 @@ Alternatively Follow These Youtube Tutorials For **[Windows](https://www.youtube
 
 <img src="readme-images/ui-overview.png">
 
+<hr>
+
 ## How To Use This Project?
 **1 - Select Currency** From The Dropdown Menu At The Top (Default: GBP (£))
 
@@ -48,6 +50,8 @@ Alternatively Follow These Youtube Tutorials For **[Windows](https://www.youtube
 **4 - View Your Entry History**, clearly showing the input type, amount, category and description entered from your input for ease to view all previous inputs!
 
 <img src="readme-images/entry-history.png">
+
+<hr>
 
 ## Tips And Tricks
 
