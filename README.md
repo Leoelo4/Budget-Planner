@@ -55,9 +55,9 @@ Alternatively Follow These Youtube Tutorials For **[Windows](https://www.youtube
 
 ## Possible Edits
 
-*Although* the source code is currently specific and would require some work in order to edit by you, It is clearly described in the inline comments which line does what, it is possible to edit the code to your liking.
+The inline comments clearly describe each line of code and how they work. It is possible to change the colours of the project, however would require large amounts of work / editing by you.
 
-Section where **Background Colour (BG) or Font Colour (FG)** can be edited to suit your preferences, although currently this requires large amounts of lines changed, future coding improvements may allow for singular line change needed for all colours of a section.
+Further improvements could be made, making the colours (Frame background colour, text colours etc...) all configurable separately. Meaning you wouldn't have to edit each frame/element to change the colour scheme of your application. It could be improved to allow all frames to be changed by one value.
 
 <img src="readme-images/income-code.png">
 
