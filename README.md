@@ -1,6 +1,6 @@
 <div align="center">
   <h1>
-    <img src="https://readme-typing-svg.herokuapp.com?font=Fira+Code&size=28&duration=4000&pause=1000&center=true&color=0095FF&width=435&lines=Budget+Planner+GUI" alt="Typing SVG" />
+    <img src="https://readme-typing-svg.herokuapp.com?font=Fira+Code&size=28&duration=4000&pause=1000&center=true&color=0095FF&width=435&lines=Budget+Planner+GUI" alt="Budget Planner GUI" />
   </h1>
 </div>
 
@@ -53,17 +53,22 @@ Alternatively Follow These Youtube Tutorials For **[Windows](https://www.youtube
 
 *Although* the source code is currently specific and would require some work in order to edit by you, It is clearly described in the inline comments which line does what, it is possible to edit the code to your liking.
 
-Section where **Background Colour (BG) or Font Colour (FG)** can be edited to suit your preferences, although currently this requires large amounts of lines changed, future improvements may see a singular change needed for all.
+Section where **Background Colour (BG) or Font Colour (FG)** can be edited to suit your preferences, although currently this requires large amounts of lines changed, future coding improvements may allow for singular line change needed for all colours of a section.
 
 <img src="readme-images/income-code.png">
 
 Here, the frame background colour (bg) can be seen and changed with the border (highlightbackground) hexcode can be edited too.
+
+Current **Window Size** is set to 800x950 for all content to be seen. However is at minimal 800x700, this will hide the history section but still allow full use of the product and can be changed in the code. The current product does not include a scrolling feature however future improvements may include.
+
+<img src="readme-images/window-size-code.png">
+
 <hr>
 <br>
 
 <div align="center">
   <h1>
-    <img src="https://readme-typing-svg.herokuapp.com?font=Fira+Code&size=28&duration=4000&pause=1000&center=true&color=0095FF&width=435&lines=Thank+You+For+Viewing+:)" alt="Typing SVG" />
+    <img src="https://readme-typing-svg.herokuapp.com?font=Fira+Code&size=28&duration=4000&pause=1000&center=true&color=0095FF&width=435&lines=Thank+You+For+Viewing+:)" alt="Thanks For Viewing" />
   </h1>
 </div>
 
