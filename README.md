@@ -53,7 +53,7 @@ Alternatively Follow These Youtube Tutorials For **[Windows](https://www.youtube
 
 <hr>
 
-## Tips And Tricks
+## Possible Edits
 
 *Although* the source code is currently specific and would require some work in order to edit by you, It is clearly described in the inline comments which line does what, it is possible to edit the code to your liking.
 
