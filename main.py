@@ -21,7 +21,7 @@ root = tk.Tk()
 root.title("Budget Tracker GUI")    # Title of the application window                
 root.geometry("800x950")            # Application size
 root.configure(bg="#0d1b2a")        # Application background color
-root.minsize(800, 950)              # Minimum size of the application 
+root.minsize(800, 700)              # Minimum size of the application 
 
 # Widget Styling
 style = ttk.Style(root)
